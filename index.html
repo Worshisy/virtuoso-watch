@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Virtuoso Watch</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#16181d;--muted:#5d6370;--line:#e2e5ea;--accent:#2f6fdb;--track:#e7ebf2;--ok:#1f8a4c;--warn:#b26a00;--bad:#c23b3b}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--card:#171a20;--ink:#e8eaee;--muted:#9aa1ad;--line:#272b33;--accent:#5b93f0;--track:#262b35;--ok:#49c07c;--warn:#e0a03a;--bad:#ef6b6b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:780px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0 2px}
+h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.read{color:var(--muted);font-size:13px}
+.stale{color:var(--bad);font-weight:600}
+.nodes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.title{font-weight:600;word-break:break-word}
+.sub{color:var(--muted);font-size:13px;margin-top:2px}
+.an{margin-top:10px}
+.an-head{display:flex;justify-content:space-between;gap:8px;font-size:14px}
+.pct{font-variant-numeric:tabular-nums;font-weight:700}
+.track{height:8px;background:var(--track);border-radius:999px;overflow:hidden;margin-top:5px}
+.fill{height:100%;background:var(--accent);border-radius:999px}
+.done .fill{background:var(--ok)}
+.meta{color:var(--muted);font-size:12.5px;margin-top:4px;font-variant-numeric:tabular-nums}
+.stage{display:inline-block;background:var(--track);border-radius:6px;padding:1px 7px;font-weight:600}
+ul{list-style:none;margin:0;padding:0}
+li{padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+li:last-child{border-bottom:0}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+.empty{color:var(--muted);font-size:14px}
+footer{color:var(--muted);font-size:12px;margin:24px 0 8px}
+</style>
+</head>
+<body>
+<main>
+<h1>Virtuoso Watch</h1>
+<div class="read" id="read">Loading…</div>
+<div class="nodes" id="nodes"></div>
+<h2 id="run-h">Running simulations</h2><div id="running"></div>
+<h2>Finished in the last 6 h</h2><div class="card"><ul id="finished"></ul></div>
+<h2>Other Virtuoso work</h2><div class="card"><ul id="sessions"></ul></div>
+<h2>Virtuoso processes</h2><div class="card"><ul id="virtuoso"></ul></div>
+<footer>Read-only view of log files and the process list on the pool nodes, refreshed every 2 min; the page updates itself.</footer>
+</main>
+<script>
+const API = "https://api.github.com/repos/Worshisy/virtuoso-watch/contents/status.json?ref=data";
+const RAW = "https://raw.githubusercontent.com/Worshisy/virtuoso-watch/data/status.json";
+let last = null;
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+function ago(sec){ sec = Math.max(0, Math.round(sec)); return sec < 90 ? sec + " s" : sec < 5400 ? Math.round(sec/60) + " min" : (sec/3600).toFixed(1) + " h"; }
+function stamp(){
+  const r = document.getElementById("read");
+  if (!last) return;
+  const age = Date.now()/1000 - last.read_epoch;
+  r.textContent = "Read " + last.read + " · " + ago(age) + " ago";
+  if (last.held) r.textContent += " · held back: " + last.held;
+  r.className = age > 400 ? "read stale" : "read";
+  if (age > 400) r.textContent += " · stale (Mac asleep or m05 login closed?)";
+}
+function analysis(a){
+  const box = el("div", "an" + (a.done ? " done" : ""));
+  const head = el("div", "an-head");
+  head.append(el("span", null, a.name + " (" + a.kind + ")"));
+  const pct = a.done ? 100 : a.percent;
+  head.append(el("span", "pct", a.done ? "done" : pct != null ? pct.toFixed(1) + " %" : a.iteration != null ? "iteration " + a.iteration : "starting"));
+  box.append(head);
+  if (pct != null) { const t = el("div", "track"), f = el("div", "fill"); f.style.width = Math.min(100, pct) + "%"; t.append(f); box.append(t); }
+  const bits = [];
+  if (a.done && a.elapsed) bits.push("took " + a.elapsed);
+  if (!a.done && a.at) bits.push("at " + a.at);
+  if (!a.done && a.eta) bits.push("left " + a.left + " → ~" + a.eta + " (" + a.eta_source + ")");
+  if (bits.length) box.append(el("div", "meta", bits.join(" · ")));
+  return box;
+}
+function render(d){
+  last = d; stamp();
+  const nodes = document.getElementById("nodes"); nodes.replaceChildren();
+  (d.nodes || []).forEach(n => {
+    const c = el("span", "chip", n.error ? n.node + ": " + n.error : n.node + " · busy " + Math.round(n.load) + "/" + n.cpus + " · ours " + n.ours + " thr (" + Math.round(n.share) + " %)" + (n.basis ? " · " + n.basis : ""));
+    if (n.share > 80) c.classList.add("bad");
+    nodes.append(c);
+  });
+  const run = document.getElementById("running"); run.replaceChildren();
+  const items = d.running || [];
+  document.getElementById("run-h").textContent = "Running simulations (" + items.length + ")";
+  if (!items.length) run.append(el("div", "card empty", "Nothing running."));
+  items.forEach(it => {
+    const c = el("div", "card");
+    c.append(el("div", "title", it.title));
+    if (it.kind === "sweep") {
+      c.append(el("div", "sub", [it.node, it.lane, it.setting, it.rss_gb + " GB"].join(" · ")));
+      c.append(analysis({name: "points", kind: "sweep", done: false, percent: it.percent,
+                         at: it.done + " of " + it.total + " done · " + it.running_points + " running · " + it.pending + " waiting",
+                         left: it.left, eta: it.eta, eta_source: it.eta_basis || "est. from rate"}));
+    } else if (it.kind === "calibre") {
+      c.append(el("div", "sub", [it.node, it.lane, "running " + it.running, it.threads + " threads", Math.round(it.cpu) + " % CPU", it.rss_gb + " GB"].join(" · ")));
+      const s = el("div", "an"); s.append(el("span", "stage", it.stage)); c.append(s);
+      c.append(el("div", "meta", (it.detail.join(" · ") || "no output files yet") + " · last file write " + it.last_write + " ago"));
+    } else {
+      c.append(el("div", "sub", [it.node, it.lane, it.setting, "running " + it.running, it.rss_gb + " GB", "log written " + it.log_age + " ago"].join(" · ")));
+      if (!it.analyses.length) c.append(el("div", "meta", "setting up (netlist read, DC operating point)"));
+      it.analyses.forEach(a => c.append(analysis(a)));
+      if (it.tests) c.append(el("div", "meta", "Maestro points/tests: " + it.tests[0] + " of " + it.tests[1] + " finished"));
+    }
+    run.append(c);
+  });
+  const list = (id, rows, fmt) => { const u = document.getElementById(id); u.replaceChildren(); if (!rows || !rows.length) { u.append(el("li", "empty", "none")); return; } rows.forEach(r => u.append(fmt(r))); };
+  list("finished", d.finished, f => { const li = el("li"); li.append(el("span", f.ok ? "ok" : "bad", f.ok ? "✓ " : "✗ ")); li.append(document.createTextNode(f.ago + " ago · " + f.node + " · " + f.name + " · " + f.result + (f.took ? " · " + f.took : ""))); return li; });
+  list("sessions", d.sessions, s => { const li = el("li"); li.append(el("b", null, s.title)); li.append(document.createTextNode(" · " + s.state + (s.doing ? " · " + s.doing : ""))); return li; });
+  list("virtuoso", d.virtuoso, p => el("li", null, p.node + " · " + p.lane + (p.batch ? " (batch)" : "") + " · display " + p.display + " · up " + p.up + " · " + p.rss_gb + " GB"));
+}
+async function load(){
+  try {
+    const r = await fetch(API, {headers: {Accept: "application/vnd.github.raw+json"}, cache: "no-store"});
+    if (!r.ok) throw new Error("api " + r.status);
+    render(await r.json());
+  } catch (e) {
+    try { const r = await fetch(RAW + "?t=" + Date.now(), {cache: "no-store"}); if (r.ok) render(await r.json()); } catch (e2) {}
+  }
+}
+load(); setInterval(load, 120000);  // GitHub API: 60 unauthenticated calls per hour per IP setInterval(stamp, 15000);
+</script>
+</body>
+</html>
