@@ -1,0 +1,130 @@
+{
+ "read_epoch": 1794656102.077127,
+ "read": "Sat 11-14 06:35:02 EST",
+ "nodes": [
+  {
+   "node": "m05",
+   "load": 33.5,
+   "cpus": 192,
+   "basis": "123 s avg",
+   "ours": 26.9,
+   "share": 14.0
+  },
+  {
+   "node": "m04",
+   "load": 0.5,
+   "cpus": 192,
+   "basis": "123 s avg",
+   "ours": 0.0,
+   "share": 0.0
+  }
+ ],
+ "running": [
+  {
+   "kind": "spectre",
+   "title": "c_CTRL_ANA_DIG_TOP_pwr_tb/pexWB_mixed/psf",
+   "node": "m05",
+   "lane": "batch / command line",
+   "setting": "Spectre X, preset CX, 32 threads",
+   "running": "8 h 41 m",
+   "rss_gb": 20.6,
+   "log_age": "0 s",
+   "analyses": [
+    {
+     "name": "tran",
+     "kind": "transient",
+     "done": false,
+     "elapsed": null,
+     "percent": 85.2,
+     "at": "4.208 ms",
+     "iteration": null,
+     "left": null,
+     "eta": null,
+     "eta_source": null
+    }
+   ],
+   "tests": null
+  }
+ ],
+ "finished": [],
+ "sessions": [
+  {
+   "title": "mac-LRLocal-V2.1-vir",
+   "state": "waiting for you",
+   "doing": "Scan and push the worker's F2 commits"
+  },
+  {
+   "title": "mac-respin-dig",
+   "state": "waiting for you",
+   "doing": "SendMessage"
+  },
+  {
+   "title": "mac-respin-master",
+   "state": "waiting for you",
+   "doing": "Record the cause of the isolation-signal finding in the plan, push"
+  },
+  {
+   "title": "mac-vir-worker",
+   "state": "waiting for you",
+   "doing": "Record F2 result in ONGOING"
+  }
+ ],
+ "virtuoso": [
+  {
+   "node": "m05",
+   "lane": "Yi's Virtuoso",
+   "batch": true,
+   "display": ":2085",
+   "up": "18 h 05 m",
+   "rss_gb": 0.9
+  },
+  {
+   "node": "m05",
+   "lane": "Yi's Virtuoso",
+   "batch": false,
+   "display": ":95",
+   "up": "38 h 14 m",
+   "rss_gb": 3.0
+  },
+  {
+   "node": "m05",
+   "lane": "Yi's Virtuoso",
+   "batch": false,
+   "display": ":86",
+   "up": "30 h 16 m",
+   "rss_gb": 1.1
+  },
+  {
+   "node": "m05",
+   "lane": "Yi's Virtuoso",
+   "batch": false,
+   "display": ":85",
+   "up": "12 h 33 m",
+   "rss_gb": 2.2
+  },
+  {
+   "node": "m05",
+   "lane": "Yi's Virtuoso",
+   "batch": false,
+   "display": ":95",
+   "up": "21 h 18 m",
+   "rss_gb": 0.9
+  },
+  {
+   "node": "m05",
+   "lane": "Yi's Virtuoso",
+   "batch": true,
+   "display": ":6118",
+   "up": "20 h 32 m",
+   "rss_gb": 1.4
+  },
+  {
+   "node": "m04",
+   "lane": "agent lane m04",
+   "batch": true,
+   "display": ":6229",
+   "up": "51 h 40 m",
+   "rss_gb": 0.8
+  }
+ ]
+}
