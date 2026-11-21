@@ -1,0 +1,903 @@
+{
+ "read_epoch": 1795278119.540303,
+ "read": "Sat 11-21 11:21:59 EST",
+ "nodes": [
+  {
+   "node": "m05",
+   "load": 8.9,
+   "cpus": 192,
+   "basis": "124 s avg",
+   "ours": 2.4,
+   "share": 1.3,
+   "disk": {
+    "mounts": [
+     {
+      "path": "/z",
+      "total": 5906183684096,
+      "used": 1747049025536,
+      "free": 3861403197440,
+      "pct": 31.2,
+      "label": "/z (local)"
+     }
+    ],
+    "scanning": false,
+    "top_age": 3087,
+    "top": [
+     [
+      "LRLocal-V2-DSP-tmp",
+      500.0
+     ],
+     [
+      "LRLocal-V2-DSP",
+      71.3
+     ],
+     [
+      "EMX_work",
+      50.1
+     ],
+     [
+      "ADE_sim_dir: LRLocal-V2.1-agent · c_CLK_DIV16_CHAIN_tb",
+      47.4
+     ],
+     [
+      "ADE_sim_dir: LRLocal-V2.1-agent · c_CLK_DIV16_TSPC_tb",
+      27.8
+     ],
+     [
+      "aon_leak",
+      23.4
+     ],
+     [
+      "ADE_sim_dir: LRLocal-V2.1-agent · c_LS_VDDL_tb",
+      22.9
+     ],
+     [
+      "ADE_sim_dir: LRLocal-V2.1-agent · c_DCO_LDO_stab_tb",
+      22.1
+     ]
+    ]
+   },
+   "pool": {
+    "budget": 180,
+    "granted": 0,
+    "measured": 2.3,
+    "age": 0,
+    "load1": 8.4,
+    "nproc": 192,
+    "claims": []
+   },
+   "mem": {
+    "total": 755.0,
+    "available": 698.3,
+    "ours": 29.2,
+    "others": 27.5,
+    "low": false
+   }
+  }
+ ],
+ "running": [],
+ "finished": [],
+ "virtuoso": [
+  {
+   "node": "m05",
+   "lane": "m05t180",
+   "batch": false,
+   "display": ":86",
+   "up": "67 h 27 m",
+   "rss_gb": 0.9
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :87",
+   "batch": false,
+   "display": ":87",
+   "up": "45 h 16 m",
+   "rss_gb": 4.6
+  },
+  {
+   "node": "m05",
+   "lane": "m05-t180",
+   "batch": true,
+   "display": ":2085",
+   "up": "190 h 52 m",
+   "rss_gb": 0.5
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :85",
+   "batch": true,
+   "display": ":2481",
+   "up": "118 h 41 m",
+   "rss_gb": 0.5
+  },
+  {
+   "node": "m05",
+   "lane": "shared GUI :95",
+   "batch": false,
+   "display": ":95",
+   "up": "211 h 01 m",
+   "rss_gb": 4.4
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :85",
+   "batch": false,
+   "display": ":85",
+   "up": "64 h 09 m",
+   "rss_gb": 1.7
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :85",
+   "batch": true,
+   "display": ":5234",
+   "up": "141 h 54 m",
+   "rss_gb": 0.5
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :85",
+   "batch": true,
+   "display": ":7885",
+   "up": "137 h 51 m",
+   "rss_gb": 0.5
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :85",
+   "batch": true,
+   "display": ":4441",
+   "up": "134 h 09 m",
+   "rss_gb": 0.5
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :85",
+   "batch": true,
+   "display": ":2603",
+   "up": "159 h 22 m",
+   "rss_gb": 0.5
+  },
+  {
+   "node": "m05",
+   "lane": "qdview180",
+   "batch": false,
+   "display": ":95",
+   "up": "194 h 05 m",
+   "rss_gb": 0.6
+  }
+ ],
+ "agents": {
+  "sessions": [
+   {
+    "name": "mac-pool-manager",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795264642.022,
+    "source": "transcript",
+    "last_action": "Run pool-status and compare with yesterday",
+    "last_epoch": 1795264634.846,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "sy-mac-agent",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795220253.451,
+    "source": "transcript",
+    "last_action": "Show the lint warning",
+    "last_epoch": 1795220183.398,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-LRLocal-V2.1-vir",
+    "model": "fable 5.2",
+    "state": "waiting-for-Yi",
+    "stale": false,
+    "task": "MC global … local check (sub-agent mc-corr)",
+    "steps": [
+     {
+      "n": 1,
+      "title": "brief + launch",
+      "status": "done",
+      "note": "mc-corr runs ended 16:31, 0 errors; claim released; dco-off launching"
+     },
+     {
+      "n": 2,
+      "title": "review + show Yi",
+      "status": "now",
+      "note": "MC done, W81 open; dco-off running"
+     },
+     {
+      "n": 3,
+      "title": "records + push",
+      "status": "next",
+      "note": ""
+     }
+    ],
+    "step_now": 2,
+    "step_total": 3,
+    "step_done": 1,
+    "waiting_on": "W83: DCO_OFF pin: setup OK for the nominal re-check runs?",
+    "updated": 1795217846.246,
+    "source": "status",
+    "changed": 1795215794.0,
+    "active": 1795217846.0,
+    "card_stale": null,
+    "last_action": "Refresh the lead status card as waiting on Yi",
+    "last_epoch": 1795215793.353,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-respin-dig",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795216929.162,
+    "source": "transcript",
+    "last_action": "Fix the waiting item name in ONGOING",
+    "last_epoch": 1795216910.986,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-skill",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795213582.646,
+    "source": "transcript",
+    "last_action": "Add short mode and new check-in reply; commit",
+    "last_epoch": 1795213574.579,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-respin-master",
+    "model": "fable 5.2",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795213041.591,
+    "source": "transcript",
+    "last_action": "SendMessage",
+    "last_epoch": 1795213035.153,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "new-proj-virtuoso",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795212842.321,
+    "source": "transcript",
+    "last_action": "SendMessage",
+    "last_epoch": 1795212837.767,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-vir-worker",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795210114.737,
+    "source": "transcript",
+    "last_action": "Extend the shared-repo staging pitfall; lint, commit, push",
+    "last_epoch": 1795210104.978,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-HFSS",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795120869.129,
+    "source": "transcript",
+    "last_action": "Record the new slides in ONGOING and push",
+    "last_epoch": 1795120862.598,
+    "kind": "session",
+    "children": []
+   }
+  ],
+  "hidden_idle": 0
+ },
+ "waiting": {
+  "count": 5,
+  "open": 5,
+  "extras": 0,
+  "areas": {
+   "vir": 5,
+   "infra": 0
+  },
+  "items": [
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W47",
+    "kind": "review",
+    "title": "Item 5 RTL: review + commit the V2.1 edits (uncommitted)",
+    "summary": [
+     "Item 5 RTL all reviewed and committed (V2.1 06f6af4). Left: the bench … tb_tx_fsm_v2p1.sv and Makefile. Checks pass (check-item5.sh)."
+    ],
+    "asked_by": "mac-respin-dig",
+    "session": "mac-respin-dig",
+    "since": 1795126905.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-dig/blob/main/docs/05-bgr-warmup/04-dco-start-delay-rtl.md"
+    },
+    "age": 151215,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W81",
+    "kind": "review",
+    "title": "MC global · local check: results on j20; may the log keep sigma multiples? bench sign-off",
+    "summary": [
+     "Result: N and P are NOT one global variable (partly separate, cloud reaches part-way to FS · SF); Vth flavours partly separate; global common, local per instance",
+     "1 the unpushed log says e.g. corners sit at about 3 sigma of the MC cloud and how sigma scales with area per kind: a) keep these ratios in the private log, b) words only, ratios stay on the server",
+     "2 bench c_MC_corr_tb: sign off · changes",
+     "Rec: 1a"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795210869.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "text": "VNC :20 window MC process only: N vs P, corners overlaid"
+    },
+    "age": 67251,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W83",
+    "kind": "decision",
+    "title": "DCO_OFF pin: setup OK for the nominal re-check runs?",
+    "summary": [
+     "TT, 25 C, 0.8 V, m05, settings = the signed-off record 5.4 benches",
+     "run 1: tail dc, 16 codes, post-PEX + schematic, 16 jobs x 1 thr, ~5 min each",
+     "run 2: core hb + hbnoise + dc, on code only, post-PEX + schematic, 1 job each, ~10-15 min each",
+     "16 cores, ~30 min total (est.)",
+     "a) go",
+     "b) run 1 only (PEX netlist is already identical)",
+     "c) also the LDO off-state transient (300 us)",
+     "Rec: a"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795213374.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/scratch/_brief-dco-off-pin.md"
+    },
+    "age": 64746,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W84",
+    "kind": "decision",
+    "title": "DCO_OFF pin: two leftovers the sign-off checker flags (floating dummy pin, stale lock)",
+    "summary": [
+     "1 DCO_tailR_V2p1 schematic is not check-clean: 2 old warnings (floating pin on dummy R45 + its net), same in the V2 copy",
+     "a) add a noConn on it (schematic edit of a frozen cell, no netlist change)",
+     "b) leave, record as known",
+     "2 … has a stale lock file from 2026-11-16 (m05 process gone)",
+     "a) remove it",
+     "b) leave",
+     "Rec: 1b 2a"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795213756.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/05-bgr-warmup/04-dco-tail-v2p1-signoff.md"
+    },
+    "age": 64364,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W85",
+    "kind": "decision",
+    "title": "C3 simulated: mode_sel=1 + core power-up without rst_ext corrupts the regfile in … of seeds: make it an item?",
+    "summary": [
+     "ask: C3 an item?",
+     "40 random seeds each, v2p1 (V2 same within 1): programmed OTP 11 reach WRITE_RF, 8 change the regfile; blank OTP 6 · 10; every changed seed also hits words beyond word 0; control with rst_ext clean",
+     "a) item: force rst · gate WRITE_RF in mode_sel=1 (plan first) b) test-procedure rule only (always rst_ext after core power-up in scan mode) c) no change",
+     "Rec: b now, a if cheap"
+    ],
+    "asked_by": "mac-respin-dig",
+    "session": "mac-respin-dig",
+    "since": 1795216905.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-dig/blob/main/docs/v2.1-rtl-coverage.md"
+    },
+    "age": 61215,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W65",
+    "kind": "decision",
+    "title": "bench_version.py fix: OK a 5-min regression rerun of the LC bench",
+    "summary": [
+     "Cause: the 17 expression outputs were added with … off, so Maestro never evaluated them; old histories can't be re-evaluated headless",
+     "fix: run turns plot on for every expression first; export warns on missing ones",
+     "rerun: same bench, same OK'd setup (Spectre X AX, 4 threads), 2 point sets, ~5 min, 16 cores",
+     "pass: 17 expressions = OCEAN numbers of log 5.5",
+     "a) OK",
+     "b) skip"
+    ],
+    "asked_by": "lc-top",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795149623.0,
+    "done": 1795193456.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/05-bgr-warmup/05-lctop-v2p1-log.md"
+    },
+    "age": 128497,
+    "closed_ago": 84664
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W66",
+    "kind": "decision",
+    "title": "NDA: kit data in git history (cell widths, two well-rule values)",
+    "summary": [
+     "Found by mac-skill's scope review + my check: std-cell widths in skills commits of 11-19 and LRLocal-V2.1-vir ONGOING commits 19f588f, a15dd0e; two well-spacing rule values in log 3.3 (worker's, 11-1…",
+     "current files cleaned (skills e550747; log 3.3 by the worker)",
+     "a) purge from history (force-push both repos)",
+     "b) leave history",
+     "Rec: a, at a quiet moment"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795183863.0,
+    "done": 1795192981.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/03-default-trims/03-pv-divider-v2p1-log.md"
+    },
+    "age": 94257,
+    "closed_ago": 85139
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W67",
+    "kind": "decision",
+    "title": "Layout XL schematic link still on the V2 source in copied V2p1 layouts: re-point?",
+    "summary": [
+     "Copied layouts keep the source's XL schematic reference (5 main layouts in LRLocal-V2.1: LCTOP, DIG_TOP, CTRL_TOP, VolDiv UN_K5 · UP_K5)",
+     "a) re-point the 5 main layouts to their own schematic + add the check to the copy tool",
+     "b) also the version · backup views",
+     "c) leave",
+     "Rec: a",
+     "Calibre results not affected"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795194443.0,
+    "done": 1795194610.0,
+    "item": "",
+    "where": {
+     "text": "VNC :20 window CTRL_LCTOP_V2p1 layout"
+    },
+    "age": 83677,
+    "closed_ago": 83510
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W68",
+    "kind": "decision",
+    "title": "CTRL_LCTOP_V2p1 layout: save + close it, then say go for the XL link re-point",
+    "summary": [
+     "4 of 5 layouts re-pointed; CTRL_LCTOP_V2p1 skipped (your j20 session holds its lock, unsaved edits)",
+     "a) you save + close, say go, the agent re-points it and check-and-saves its schematic",
+     "b) you set it yourself in Layout XL",
+     "Rec: a"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795195427.0,
+    "done": 1795196835.0,
+    "item": "",
+    "where": {
+     "text": "VNC :20 window CTRL_LCTOP_V2p1 layout"
+    },
+    "age": 82693,
+    "closed_ago": 81285
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W69",
+    "kind": "decision",
+    "title": "CTRL_LCTOP_V2p1 layout is still locked by your j20 Virtuoso: close the window, then say go",
+    "summary": [
+     "After your go the layout was still open in edit mode on j20 (lock held), so nothing was changed",
+     "a) close that layout window (or reopen it read-only), say go",
+     "b) you set the XL schematic link yourself",
+     "Rec: a"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795196879.0,
+    "done": 1795196962.0,
+    "item": "",
+    "where": {
+     "text": "VNC :20 window CTRL_LCTOP_V2p1 layout"
+    },
+    "age": 81241,
+    "closed_ago": 81158
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W70",
+    "kind": "decision",
+    "title": "MC global · local check plan (P vs N, Vth flavours): 5 answers",
+    "summary": [
+     "Test bench c_MC_corr_tb: V_GS at fixed current per device kind, runs process-only · mismatch-only · both · 5 corners",
+     "1 devices: a our flavours, b all",
+     "2 points: a 1000, b 300, c 3000",
+     "3 numbers: a server only + conclusions, b also in private log",
+     "4 model: a Opus medium, b Sonnet high, c Fable",
+     "5 setup OK? (dc, 12 cores m05, under 30 min est.)",
+     "Rec: 1a 2a 3a"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795198828.0,
+    "done": 1795200934.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/WHITEBOARD.md"
+    },
+    "age": 79292,
+    "closed_ago": 77186
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W71",
+    "kind": "review",
+    "title": "MC check bench c_MC_corr_tb: look at it first, or run auto?",
+    "summary": [
+     "New-bench rule: you check a new bench before its first run unless you say auto",
+     "a) auto: run without your look",
+     "b) you look at the schematic first (image + j20 window come when the build ends)",
+     "Rec: a (dc-only test bench, ideal sources, nothing of yours touched)"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795201167.0,
+    "done": 1795202483.0,
+    "item": "",
+    "where": {
+     "text": "VNC :20 window MC corr bench"
+    },
+    "age": 76953,
+    "closed_ago": 75637
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W72",
+    "kind": "decision",
+    "title": "DCO_OFF pin rename plan (DCO tail bit 3): 5 answers",
+    "summary": [
+     "4-bit tail bus becomes 3-bit trim + one off pin (1 = off) in DCO_tailR_V2p1, DCO_Core_V2p1, AFE_Full_V2p1_VarFreq",
+     "1 names: a … DCO_OFF, AFE dco_off; b DCO_OFF everywhere",
+     "2 scope: a 3 cells + benches; b also chip top; c sch + symbol only now",
+     "3 re-check: a LVS + PEX + 2 nominal points; b LVS only; c full",
+     "4 old R_SW 8 = off in records: a keep + mapping line; b rewrite",
+     "5 model: a Sonnet high; b Opus medium; c Fable",
+     "Rec: 1a 2a 3a 4a"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795205888.0,
+    "done": 1795206153.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/WHITEBOARD.md"
+    },
+    "age": 72232,
+    "closed_ago": 71967
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W73",
+    "kind": "decision",
+    "title": "CTRL_ANA_DIG_TOP_V2p1: top pin obs_ctrl_2Tvref<0:3> now undriven",
+    "summary": [
+     "CTRL_TOP_V2p1 lost obs_ctrl_2Tvref<0:3> (your Q2). In the ANA_DIG top copy the pin of that name is now undriven",
+     "a) remove it from ANA_DIG_TOP_V2p1 schematic + symbol (chip top drops it too)",
+     "b) keep the pin with a noConn",
+     "Rec: a, same as Q2"
+    ],
+    "asked_by": "mac-vir-worker",
+    "session": "mac-vir-worker",
+    "since": 1795206367.0,
+    "done": 1795206439.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/scratch/_brief-ana-dig-top-v2p1.md"
+    },
+    "age": 71753,
+    "closed_ago": 71681
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W74",
+    "kind": "decision",
+    "title": "CTRL_ANA_DIG_TOP_V2p1: new output aon_to_afe_dco_off_09 of CTRL_DIG_TOP_V2p1 has no top net",
+    "summary": [
+     "New LC channel output (0.9 V) needs to reach core pin aon_to_afe_dco_off_bypass_i at chip top",
+     "a) new ANA_DIG top output pin aon_to_afe_dco_off_09, wired and routed like aon_rst_tx (schematic, symbol, layout plan)",
+     "b) noConn now, add with the chip top",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker",
+    "session": "mac-vir-worker",
+    "since": 1795206367.0,
+    "done": 1795206439.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/scratch/_brief-ana-dig-top-v2p1.md"
+    },
+    "age": 71753,
+    "closed_ago": 71681
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W75",
+    "kind": "decision",
+    "title": "Headless lane m05hl2 stuck in a Maestro export (MC check): restart it?",
+    "summary": [
+     "The process-only MC run finished (0 errors) but the Maestro table export of 1000 x 113 outputs holds the lane at 100 % CPU since 15:08, no ETA",
+     "a) restart the lane now, rerun process-only (~15 min), later runs read the results DB without that export",
+     "b) wait up to 30 min, then restart",
+     "c) keep waiting",
+     "Rec: a",
+     "only our own sub-agent uses this lane; your GUIs are not touched"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795206988.0,
+    "done": 1795208189.0,
+    "item": "",
+    "where": {
+     "text": "VNC :95 window none (headless lane m05hl2)"
+    },
+    "age": 71132,
+    "closed_ago": 69931
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W76",
+    "kind": "review",
+    "title": "CTRL_ANA_DIG_TOP_V2p1 layout plan c1–c6 (LVS INCORRECT after the swap, 4 shorts)",
+    "summary": [
+     "Swap: 4 shorts where ANA_DIG routes now hit the chain block",
+     "c1 remove 4 obs_ctrl_2Tvref pin shapes (W73)",
+     "c2 re-route obs_ctrl_v_div bar to block pin, metal 6",
+     "c3 trim VDD_DCO11 route at block pin (cause not isolated)",
+     "c5 new stub at y 162.3, after DIG pin exists",
+     "Rec: OK c1-c3, rerun …"
+    ],
+    "asked_by": "mac-vir-worker",
+    "session": "mac-vir-worker",
+    "since": 1795207900.0,
+    "done": 1795208069.0,
+    "item": "",
+    "where": {
+     "text": "VNC j20 :20 window 110 CTRL_ANA_DIG_TOP_V2p1 plan"
+    },
+    "age": 70220,
+    "closed_ago": 70051
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W77",
+    "kind": "review",
+    "title": "Log 14.6 (CTRL_ANA_DIG_TOP_V2p1) review badge",
+    "summary": [
+     "Log 14.6 is ⏳ Unreviewed: copy + swap, pin map, … sorted, plan, clean-up deferred (W76)",
+     "a) keep ⏳",
+     "b) 👀 glanced",
+     "c) ✅ confirmed",
+     "Rec: a until the layout clean-up"
+    ],
+    "asked_by": "mac-vir-worker",
+    "session": "mac-vir-worker",
+    "since": 1795209037.0,
+    "done": 1795210066.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/14-layout/06-ana-dig-top-v2p1-log.md"
+    },
+    "age": 69083,
+    "closed_ago": 68054
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W78",
+    "kind": "decision",
+    "title": "SIMDATA class of the CTRL_ANA_DIG_TOP_V2p1 … run folder",
+    "summary": [
+     "Only Calibre … runs, no sims",
+     "a) class D (default for Calibre folders), nothing …",
+     "b) other",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker",
+    "session": "mac-vir-worker",
+    "since": 1795209037.0,
+    "done": 1795210066.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/SIMDATA.md"
+    },
+    "age": 69083,
+    "closed_ago": 68054
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W79",
+    "kind": "decision",
+    "title": "C3: mode_sel = 1 holds tx_en high (core may run from a random state into WRITE_RF): make it a respin item?",
+    "summary": [
+     "ask: C3 an item?",
+     "from RTL reading only (aon_fsm_v2.sv:313), not simulated",
+     "mode_sel=1 keeps the core clock on; core power-up without rst_ext -> random FSM state can reach WRITE_RF; regfile reset only by AON reset",
+     "a) item: gate or reset fix, simulate first",
+     "b) check in sim first, then decide",
+     "c) no change",
+     "Rec: b"
+    ],
+    "asked_by": "mac-respin-dig",
+    "session": "mac-respin-dig",
+    "since": 1795209636.0,
+    "done": 1795209849.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-dig/blob/main/docs/00-v2/04-chip-level.md"
+    },
+    "age": 68484,
+    "closed_ago": 68271
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W80",
+    "kind": "decision",
+    "title": "Item 1 plan: OTP read stops at the last used word (tx_fsm_v2p1), Q1-Q3",
+    "summary": [
+     "ask: item 1 plan OK?",
+     "READ_MEM2 ends after the last TX-buffer word (from word 0), ~8 lines, no image change; default packet 945 -> 480 cycles (est.)",
+     "Q1 last-word width: a) 8 bit b) 7 bit",
+     "Q2 check: a) DV core bench + 3 OTP images b) core count only",
+     "Q3 regfile words past last: a) TX-buffer content b) also stop WRITE_RF",
+     "Rec: Q1 a, Q2 a, Q3 a"
+    ],
+    "asked_by": "mac-respin-dig",
+    "session": "mac-respin-dig",
+    "since": 1795210281.0,
+    "done": 1795210946.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-dig/blob/main/WHITEBOARD.md"
+    },
+    "age": 67839,
+    "closed_ago": 67174
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W82",
+    "kind": "sign-off",
+    "title": "DCO_OFF pin: your DRC · LVS double check of DCO_tailR_V2p1 before PEX",
+    "summary": [
+     "Batch: DRC same 2 deck warnings as record 5.4, 0 errors; LVS CORRECT. Only the pin · net name SW<3> -> DCO_OFF changed, no shape moved",
+     "a) double check OK, go PEX",
+     "b) skip your check for this label-only change, go PEX",
+     "c) problem",
+     "window 112 on j20, zoomed on the pin (m5, right edge)"
+    ],
+    "asked_by": "mac-LRLocal-V2.1-vir",
+    "session": "mac-LRLocal-V2.1-vir",
+    "since": 1795212131.0,
+    "done": 1795212354.0,
+    "item": "",
+    "where": {
+     "text": "VNC :20 window DCO_OFF pin rename: tailR layout (m2-m5)"
+    },
+    "age": 65989,
+    "closed_ago": 65766
+   }
+  ]
+ },
+ "site_version": "ad549b561d"
+}
