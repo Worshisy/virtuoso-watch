@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Virtuoso Watch</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#16181d;--muted:#5d6370;--line:#e2e5ea;--accent:#2f6fdb;--track:#e7ebf2;--ok:#1f8a4c;--warn:#b26a00;--bad:#c23b3b}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--card:#171a20;--ink:#e8eaee;--muted:#9aa1ad;--line:#272b33;--accent:#5b93f0;--track:#262b35;--ok:#49c07c;--warn:#e0a03a;--bad:#ef6b6b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:1120px;margin:0 auto;padding:16px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:0 20px;align-items:start}
+.side{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow-y:auto;order:2}
+.side .nodes{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;margin-top:0}
+.side .chip{border-radius:12px}
+@media (max-width:800px){.layout{grid-template-columns:minmax(0,1fr)}.side{position:static;max-height:none;overflow:visible;order:0}.side .nodes{flex-direction:row;flex-wrap:wrap}.side .chip{border-radius:999px}}
+h1{font-size:20px;margin:4px 0 2px}
+h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.read{color:var(--muted);font-size:13px}
+.stale{color:var(--bad);font-weight:600}
+.nodes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.title{font-weight:600;word-break:break-word}
+.sub{color:var(--muted);font-size:13px;margin-top:2px}
+.an{margin-top:10px}
+.an-head{display:flex;justify-content:space-between;gap:8px;font-size:14px}
+.pct{font-variant-numeric:tabular-nums;font-weight:700}
+.track{height:8px;background:var(--track);border-radius:999px;overflow:hidden;margin-top:5px}
+.fill{height:100%;background:var(--accent);border-radius:999px}
+.done .fill{background:var(--ok)}
+.meta{color:var(--muted);font-size:12.5px;margin-top:4px;font-variant-numeric:tabular-nums}
+.stage{display:inline-block;background:var(--track);border-radius:6px;padding:1px 7px;font-weight:600}
+ul{list-style:none;margin:0;padding:0}
+li{padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+li:last-child{border-bottom:0}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+.empty{color:var(--muted);font-size:14px}
+.ag{border-left:3px solid var(--line);padding:2px 0 2px 10px;margin:8px 0 0 4px}
+.ag-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.ag-name{font-weight:600;word-break:break-word}
+.badge{display:inline-block;border-radius:6px;padding:0 7px;font-size:12px;font-weight:600;background:var(--track);color:var(--muted)}
+.w-ref{font-weight:700;margin-right:4px}.b-running{background:var(--accent);color:#fff}.b-waiting-for-Yi{background:var(--warn);color:#fff}.b-blocked{background:var(--bad);color:#fff}
+.b-cardstale{background:var(--warn);color:#fff}.b-noprog{background:var(--bad);color:#fff}.b-done{background:var(--ok);color:#fff}
+.now-step{margin-top:6px;font-size:14px;font-weight:600}
+.steps{margin:4px 0 0;padding:0;list-style:none}
+.steps li{padding:2px 0;border:0;font-size:13px;color:var(--muted)}
+.steps li.s-now{color:var(--ink);font-weight:600}.steps li.s-blocked{color:var(--bad)}.steps li.s-done{color:var(--ok)}
+details{margin-top:4px;font-size:13px;color:var(--muted)}summary{cursor:pointer}
+.idle-line{padding:4px 0;font-size:13px;color:var(--muted)}
+.idle-line b{color:var(--ink)}
+.disk{margin-bottom:10px}
+.drow{margin-top:8px}.drow:first-child{margin-top:0}
+.drow .fill.amber{background:var(--warn)}.drow .fill.red{background:var(--bad)}
+.top li{padding:3px 0;font-size:13px;display:flex;justify-content:space-between;gap:10px}
+.top li span:last-child{font-variant-numeric:tabular-nums;white-space:nowrap}
+.pool .fill.amber,.mem .fill.amber{background:var(--warn)}
+.mem .grant{position:relative}.mem .grant .gfill{position:absolute;left:0;top:0;height:100%;background:var(--line);border-radius:999px}.mem .grant .fill{position:relative}
+.pool .grant{position:relative}.pool .grant .gfill{position:absolute;left:0;top:0;height:100%;background:var(--line);border-radius:999px}
+.pool .grant .fill{position:relative}
+.claims li{padding:3px 0;font-size:12.5px;display:block}
+.wait li{padding:7px 0;font-size:13px}
+.wait .w-title{font-weight:600;word-break:break-word}
+.wait .w-meta{color:var(--muted);font-size:12px;margin-top:2px;word-break:break-word}
+.wait a{color:var(--accent);text-decoration:none}.wait a:hover{text-decoration:underline}
+.k-sign-off{background:var(--ok);color:#fff}.k-decision{background:var(--warn);color:#fff}.k-review{background:var(--accent);color:#fff}
+.wait li.w-closed .w-title{text-decoration:line-through;color:var(--muted);font-weight:400}
+.wait-extra{border-style:dashed;background:transparent}
+.wait-extra .w-title{font-weight:400}
+.w-open{font:inherit;font-size:12px;color:var(--accent);background:none;border:0;padding:2px 4px;margin:-2px 0;cursor:pointer;border-radius:4px}
+.w-open:hover{text-decoration:underline}.w-open:focus-visible{outline:2px solid var(--accent)}
+.w-sum{margin:6px 0 2px;padding:6px 10px;border-left:3px solid var(--accent);background:var(--bg);border-radius:0 6px 6px 0;font-size:13px}
+.w-sum ul{margin:0;padding:0}.w-sum li{padding:2px 0;border:0;font-size:13px;word-break:break-word}
+.w-none{color:var(--muted);font-style:italic}.w-src{display:inline-block;margin-top:4px;font-size:11.5px;color:var(--muted)}
+a.w-src{color:var(--muted);text-decoration:underline}
+.wait-area-h{font-size:12.5px;font-weight:700;color:var(--ink);margin:10px 0 6px}
+.wait-extra-h{color:var(--muted);font-size:12px;margin:2px 0 4px}
+footer{color:var(--muted);font-size:12px;margin:24px 0 8px}
+</style>
+</head>
+<body>
+<main>
+<h1>Virtuoso Watch</h1>
+<div class="read" id="read">Loading…</div>
+<div class="layout">
+<aside class="side"><div id="wait-box" hidden><h2 id="wait-h">Waiting for Yi</h2><div id="waiting"></div></div>
+<h2 id="disk-h">Disk (/z), cores and RAM</h2><div id="disk"></div></aside>
+<div class="mainCol">
+<h2 id="ag-h">Agents</h2><div id="agents"></div>
+<h2 id="run-h">Running simulations</h2><div id="running"></div><h2 id="stall-h" hidden>Stalled / abandoned</h2><div id="stalled"></div>
+<h2>Finished in the last 6 h</h2><div class="card"><ul id="finished"></ul></div>
+<h2>Virtuoso processes</h2><div class="card"><ul id="virtuoso"></ul></div>
+</div></div>
+<footer>Read-only view of log files and the process list on the pool nodes and of the Mac agents (their status files or last action), refreshed every 2 min; the page updates itself.</footer>
+</main>
+<script>
+const API = "https://api.github.com/repos/Worshisy/virtuoso-watch/contents/status.json?ref=data";
+const RAW = "https://raw.githubusercontent.com/Worshisy/virtuoso-watch/data/status.json";
+const SITE_VERSION = "611f995afb";   // stamped by vwatch.py --site; the data carries the version last pushed
+let last = null;
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+function ago(sec){ sec = Math.max(0, Math.round(sec)); return sec < 90 ? sec + " s" : sec < 5400 ? Math.round(sec/60) + " min" : (sec/3600).toFixed(1) + " h"; }
+function stamp(){
+  const r = document.getElementById("read");
+  if (!last) return;
+  const age = Date.now()/1000 - last.read_epoch;
+  r.textContent = "Read " + last.read + " · " + ago(age) + " ago";
+  if (last.held) r.textContent += " · held back: " + last.held;
+  r.className = age > 400 ? "read stale" : "read";
+  if (age > 400) r.textContent += " · stale (Mac asleep or m05 login closed?)";
+}
+function analysis(a){
+  const box = el("div", "an" + (a.done ? " done" : ""));
+  const head = el("div", "an-head");
+  head.append(el("span", null, a.name + " (" + a.kind + ")"));
+  const pct = a.done ? 100 : a.percent;
+  head.append(el("span", "pct", a.done ? "done" : pct != null ? pct.toFixed(1) + " %" : a.iteration != null ? "iteration " + a.iteration : "starting"));
+  box.append(head);
+  if (pct != null) { const t = el("div", "track"), f = el("div", "fill"); f.style.width = Math.min(100, pct) + "%"; t.append(f); box.append(t); }
+  const bits = [];
+  if (a.done && a.elapsed) bits.push("took " + a.elapsed);
+  if (!a.done && a.at) bits.push("at " + a.at);
+  if (!a.done && a.eta) bits.push("left " + a.left + " → ~" + a.eta + " (" + a.eta_source + ")");
+  if (bits.length) box.append(el("div", "meta", bits.join(" · ")));
+  return box;
+}
+const STATE_LABEL = {"waiting-for-Yi": "waiting for Yi", idle: "idle (waiting for Yi)"};
+function dur(sec){ const m = Math.round(sec / 60); return m < 60 ? m + " min" : Math.floor(m / 60) + " h " + String(m % 60).padStart(2, "0") + " min"; }
+function stepList(steps, nextLimit){
+  const wrap = el("div");
+  const done = steps.filter(x => x.status === "done"), rest = steps.filter(x => x.status !== "done" && x.status !== "now");
+  if (done.length) {
+    const d = el("details"); d.append(el("summary", null, done.length + " step" + (done.length === 1 ? "" : "s") + " done"));
+    const u = el("ul", "steps"); done.forEach(x => u.append(el("li", "s-done", "✓ " + x.n + ". " + x.title + (x.note ? " · " + x.note : "")))); d.append(u); wrap.append(d);
+  }
+  const u = el("ul", "steps");
+  rest.slice(0, nextLimit).forEach(x => u.append(el("li", "s-" + x.status, (x.status === "blocked" ? "✗ " : "· ") + x.n + ". " + x.title + (x.note ? " · " + x.note : ""))));
+  if (rest.length > nextLimit) u.append(el("li", null, "+ " + (rest.length - nextLimit) + " more"));
+  wrap.append(u);
+  return wrap;
+}
+function agentBlock(a, nested, lead){
+  const box = el("div", nested ? "ag" : "");
+  const head = el("div", "ag-head");
+  head.append(el("span", "ag-name", (nested && lead ? lead + " › " : "") + a.name));   // [c] 2026-11-27: sub-agents carry their lead's task name
+  if (a.model) head.append(el("span", "sub", a.model));
+  head.append(el("span", "badge b-" + a.state, STATE_LABEL[a.state] || a.state));
+  if (a.no_progress) head.append(el("span", "badge b-noprog", "no progress " + dur(a.no_progress)));
+  else if (a.card_stale) head.append(el("span", "badge b-cardstale", "card stale " + dur(a.card_stale)));   // [c] content old, activity live
+  else if (a.stale) head.append(el("span", "badge warn", "stale"));
+  const now = Date.now()/1000;
+  const changed = a.changed || a.updated;   // [c] Yi 2026-11-18: "updated" = the card's content, not its activity beat
+  head.append(el("span", "sub", "updated " + ago(now - changed) + " ago" + (a.active && a.active - changed > 60 ? " · active " + ago(now - a.active) + " ago" : "")));
+  box.append(head);
+  if (a.task || a.task_name) box.append(el("div", "sub", !nested && a.task_name ? a.task_name + (a.task ? " · " + a.task : "") : a.task));
+  if (a.step_total) {
+    const curs = a.steps.filter(x => x.status === "now");
+    if (!curs.length) box.append(el("div", "now-step", a.step_done + " of " + a.step_total + " steps done"));
+    curs.forEach(cur => box.append(el("div", "now-step", "▶ Step " + cur.n + " of " + a.step_total + ": " + cur.title + (cur.note ? " · " + cur.note : ""))));
+    const t = el("div", "track"), f = el("div", "fill"); f.style.width = (100 * a.step_done / a.step_total) + "%"; t.append(f); box.append(t);
+    box.append(stepList(a.steps, 4));
+  }
+  if (a.waiting_on) box.append(el("div", "meta warn", "Waiting on: " + a.waiting_on));
+  if (a.last_action) box.append(el("div", "meta", "Last action" + (a.step_total ? "" : " (from transcript)") + ": " + a.last_action + (a.last_epoch ? " · " + ago(now - a.last_epoch) + " ago" : "")));
+  return box;
+}
+function renderAgents(ag){
+  const root = document.getElementById("agents"); root.replaceChildren();
+  const sessions = (ag && ag.sessions) || [];
+  const live = x => ["running", "waiting-for-Yi", "blocked"].includes(x.state);
+  const full = sessions.filter(s => live(s) || s.step_total || s.children.some(live) || s.state === "closed");
+  const idle = sessions.filter(s => !full.includes(s));
+  document.getElementById("ag-h").textContent = "Agents (" + sessions.reduce((n, s) => n + 1 + s.children.filter(live).length, 0) + ")";
+  full.forEach(s => {
+    const card = el("div", "card"); card.append(agentBlock(s, false));
+    const active = s.children.filter(c => live(c) || c.state === "quiet"), over = s.children.filter(c => !active.includes(c));
+    active.forEach(c => card.append(agentBlock(c, true, s.task_name)));
+    if (over.length) { const d = el("details"); d.append(el("summary", null, over.length + " finished sub-agent" + (over.length === 1 ? "" : "s")));
+      over.forEach(c => { const l = el("div", "idle-line"); l.append(el("b", null, (s.task_name ? s.task_name + " › " : "") + c.name)); l.append(document.createTextNode((c.model ? " · " + c.model : "") + " · " + c.state + " · " + ago(Date.now()/1000 - c.updated) + " ago" + (c.last_action ? " · " + c.last_action : ""))); d.append(l); });
+      card.append(d); }
+    root.append(card);
+  });
+  if (idle.length || (ag && ag.hidden_idle)) {
+    const card = el("div", "card"); const d = el("details"); d.append(el("summary", null, idle.length + " idle session" + (idle.length === 1 ? "" : "s") + (ag.hidden_idle ? " (+" + ag.hidden_idle + " older)" : "")));
+    idle.forEach(s => { const l = el("div", "idle-line"); l.append(el("b", null, s.name)); l.append(document.createTextNode((s.model ? " · " + s.model : "") + " · idle " + ago(Date.now()/1000 - s.updated) + (s.last_action ? " · last: " + s.last_action : ""))); d.append(l); });
+    card.append(d); root.append(card);
+  }
+  if (!sessions.length) root.append(el("div", "card empty", "No agent sessions found."));
+}
+function checkVersion(d){   // reload once when a newer index.html was pushed; at most 3 retries (the Pages build lags the push)
+  if (window.VWATCH_DATA || !d.site_version || SITE_VERSION.startsWith("__") || d.site_version === SITE_VERSION) return;
+  const q = new URLSearchParams(location.search), tries = q.get("v") === d.site_version ? +q.get("r") || 0 : 0;
+  if (tries >= 3) return;
+  setTimeout(() => location.replace(location.pathname + "?v=" + d.site_version + "&r=" + (tries + 1)), tries ? 60000 : 0);
+}
+function size(gib){ return gib >= 1024 ? (gib / 1024).toFixed(2) + " TB" : gib >= 10 ? Math.round(gib) + " GB" : gib.toFixed(1) + " GB"; }
+function diskRow(label, usedGib, totalGib, pct, extra){
+  const row = el("div", "drow");
+  const head = el("div", "an-head"); head.append(el("span", null, label));
+  const p = el("span", "pct" + (pct >= 95 ? " bad" : pct >= 85 ? " warn" : ""), pct.toFixed(0) + " %"); head.append(p); row.append(head);
+  const t = el("div", "track"), f = el("div", "fill" + (pct >= 95 ? " red" : pct >= 85 ? " amber" : "")); f.style.width = Math.min(100, pct) + "%"; t.append(f); row.append(t);
+  row.append(el("div", "meta", size(usedGib) + " of " + size(totalGib) + " used" + extra));
+  return row;
+}
+function poolBlock(p){
+  const box = el("div", "drow pool");
+  const over = p.measured >= 1 && p.measured > 1.1 * p.granted;
+  const head = el("div", "an-head"); head.append(el("span", null, "Core pool"));
+  head.append(el("span", "pct" + (over ? " warn" : ""), p.measured.toFixed(1) + " / " + p.budget));
+  box.append(head);
+  const t = el("div", "track grant"), g = el("div", "gfill"), f = el("div", "fill" + (over ? " amber" : ""));
+  g.style.width = Math.min(100, 100 * p.granted / p.budget) + "%"; f.style.width = Math.min(100, 100 * p.measured / p.budget) + "%";
+  t.append(g, f); box.append(t);
+  box.append(el("div", "meta", "budget " + p.budget + " · granted " + p.granted + " · measured " + p.measured.toFixed(1) + " thr" + (p.age != null ? " · " + ago(p.age) + " ago" : "") + (over ? " · measured above granted" : "")));
+  if (p.claims.length) {
+    const u = el("ul", "claims");
+    p.claims.forEach(c => u.append(el("li", c.state === "granted" ? null : "sub", c.agent + " · " + c.task + " · " + c.prio + " · " + c.cores + (c.want != null && c.want !== c.cores ? "/" + c.want : "") + " cores · " + c.state + (c.measured != null ? " · measured " + c.measured : "") + (c.ram_gb != null ? " · " + size(c.ram_gb) + " RAM" : ""))));
+    box.append(u);
+  }
+  return box;
+}
+function memBlock(m){   // [c] Yi 2026-11-19: RAM bar: ours (accent) + others (grey) of total; amber when available < 15 %
+  const box = el("div", "drow mem");
+  const pct = 100 * (m.total - m.available) / m.total;
+  const head = el("div", "an-head"); head.append(el("span", null, "RAM"));
+  head.append(el("span", "pct" + (m.low ? " warn" : ""), Math.round(pct) + " %")); box.append(head);
+  const t = el("div", "track grant"), g = el("div", "gfill"), f = el("div", "fill" + (m.low ? " amber" : ""));
+  g.style.width = Math.min(100, pct) + "%"; f.style.width = Math.min(100, 100 * m.ours / m.total) + "%";
+  t.append(g, f); box.append(t);
+  box.append(el("div", "meta" + (m.low ? " warn" : ""), size(m.available) + " available of " + size(m.total) + " · ours " + size(m.ours) + " · others " + size(m.others) + (m.low ? " · below 15 % free" : "")));
+  return box;
+}
+function renderDisk(nodes){
+  const root = document.getElementById("disk"); root.replaceChildren();
+  const GIB = 1073741824;
+  (nodes || []).filter(n => n.disk || n.pool || n.mem || n.error).forEach(n => {
+    const head = n.error ? n.node + ": " + n.error : n.node + " · busy " + Math.round(n.load) + "/" + n.cpus + " · ours " + n.ours + " thr (" + Math.round(n.share) + " %)" + (n.basis ? " · " + n.basis : "");   // [c] Yi 2026-11-19: the old Servers line, now the card header
+    const card = el("div", "card disk"); card.append(el("div", "title" + (n.share > 80 || n.error ? " bad" : ""), head));
+    if (n.disk) n.disk.mounts.forEach(m => card.append(diskRow(m.label, m.used / GIB, m.total / GIB, m.pct, " · " + size(m.free / GIB) + " free")));
+    if (n.disk && n.disk.top.length) {   // [c] Yi 2026-11-19: order /z · its folders · RAM · core pool
+      const d = el("details"); d.open = n.disk.mounts.some(m => m.path === "/z" && m.pct >= 85);
+      d.append(el("summary", null, "Our biggest folders (scan " + ago(n.disk.top_age) + " old, hourly)"));
+      const u = el("ul", "top"); n.disk.top.forEach(([name, gib]) => { const li = el("li"); li.append(el("span", null, name), el("span", null, size(gib))); u.append(li); });
+      d.append(u); card.append(d);
+    } else if (n.disk && n.disk.scanning) card.append(el("div", "meta", "Folder scan running (first one, hourly after that)."));
+    if (n.mem) card.append(memBlock(n.mem));
+    if (n.pool) card.append(poolBlock(n.pool));
+    root.append(card);
+  });
+  if (!root.children.length) root.append(el("div", "card empty", "No disk data."));
+}
+function waitAge(sec){ return sec >= 172800 ? (sec / 86400).toFixed(1) + " d" : ago(sec); }
+function waitLine(w, now){   // [c] one waiting item: kind tag, title, who asks / which thread, age, link
+  const li = el("li", w.closed_ago != null ? "w-closed" : null);
+  const head = el("div", "ag-head");
+  head.append(el("span", "badge " + (w.source === "explicit" ? "k-" + w.kind : ""), w.source === "explicit" ? w.kind : "ONGOING"));
+  if (w.id || w.label) head.append(el("span", "w-ref", w.label ? w.label + (w.id ? " · " + w.id : "") : w.id));   // [c] Yi 2026-11-18: the item's short name, to answer by; 2026-11-27: label <task>_<n> first
+  head.append(el("span", "w-title", w.title));
+  if (w.stale) head.append(el("span", "badge warn", "stale?"));   // [c] thread not updated for > 2 days
+  li.append(head);
+  const meta = el("div", "w-meta");
+  const bits = w.source === "explicit"
+    ? [w.asked_by + (w.session && w.session !== w.asked_by ? " (" + w.session + ")" : ""), (w.item ? "item " + w.item : ""),
+       w.closed_ago != null ? "done " + waitAge(w.closed_ago) + " ago" : "waiting " + waitAge(w.age)]
+    : [w.repo + " · " + w.thread, w.section !== "thread" && w.thread.toLowerCase() !== w.section ? w.section : "", (w.thread_updated ? "thread updated " + w.thread_updated + " (" + waitAge(w.thread_age) + " ago)" : "file edited " + waitAge(w.file_age) + " ago")];   // [c] 2026-11-19: the thread's age, not the file's
+  meta.append(document.createTextNode(bits.filter(Boolean).join(" · ")));
+  // [c] Yi 2026-11-18: "open" unfolds a short summary in the page; the pointer is a small "source" link inside it
+  const key = w.id || "x:" + w.title, shown = openWait.has(key);
+  const btn = el("button", "w-open", shown ? "close" : "open"); btn.type = "button"; btn.setAttribute("aria-expanded", shown);
+  const body = el("div", "w-sum"); body.hidden = !shown;
+  const lines = w.source === "explicit" ? (w.summary || []) : [w.full || w.title];
+  if (lines.length) { const u = el("ul"); lines.forEach(x => u.append(el("li", null, x))); body.append(u); }
+  else body.append(el("div", "w-none", "no summary yet"));
+  if (w.where && w.where.url) { const a = el("a", "w-src", "source ↗"); a.href = w.where.url; a.target = "_blank"; a.rel = "noopener"; body.append(a); }
+  else if (w.where && w.where.text) body.append(el("div", "w-src", "source: " + w.where.text));
+  btn.addEventListener("click", () => { const now = !openWait.has(key); now ? openWait.add(key) : openWait.delete(key); body.hidden = !now; btn.textContent = now ? "close" : "open"; btn.setAttribute("aria-expanded", now); });
+  meta.append(document.createTextNode(" · ")); meta.append(btn);
+  li.append(meta); li.append(body);
+  return li;
+}
+const openWait = new Set();   // unfolded items, kept across the 2-min re-render
+function renderWaiting(wt){
+  const box = document.getElementById("wait-box");
+  if (!wt) { box.hidden = true; return; }   // older data without the panel
+  box.hidden = false;
+  document.getElementById("wait-h").textContent = "Waiting for Yi (" + wt.count + ")";
+  const root = document.getElementById("waiting"); root.replaceChildren();
+  const now = Date.now()/1000;   // [c] Yi 2026-11-18: two blocks, Virtuoso / design first, then infra; items without an area count as design
+  [["vir", "Virtuoso / design"], ["infra", "Infra"]].forEach(([area, label]) => {
+    const inArea = wt.items.filter(w => (w.area || "vir") === area);
+    const mine = inArea.filter(w => w.source === "explicit"), extra = inArea.filter(w => w.source !== "explicit");
+    const n = wt.areas ? wt.areas[area] : mine.filter(w => w.closed_ago == null).length + extra.length;
+    root.append(el("div", "wait-area-h", label + " (" + n + ")"));
+    const card = el("div", "card"), u = el("ul", "wait");
+    const live = mine.filter(w => w.closed_ago == null), closed = mine.filter(w => w.closed_ago != null);   // [c] Yi 2026-11-18: done items hidden by default
+    live.forEach(w => u.append(waitLine(w, now)));
+    if (!live.length) u.append(el("li", "empty", "Nothing from the agents."));
+    card.append(u);
+    if (closed.length) {
+      const d = el("details", "w-done"); d.open = openWait.has("done:" + area);
+      d.append(el("summary", null, closed.length + " done today"));
+      d.addEventListener("toggle", () => d.open ? openWait.add("done:" + area) : openWait.delete("done:" + area));
+      const u3 = el("ul", "wait"); closed.forEach(w => u3.append(waitLine(w, now))); d.append(u3); card.append(d);
+    }
+    root.append(card);
+    if (extra.length) {
+      const c2 = el("div", "card wait-extra");
+      const d = el("details"); d.open = extra.length <= 3; d.append(el("summary", "wait-extra-h", "From ONGOING.md, unconfirmed (" + extra.length + ")"));
+      const u2 = el("ul", "wait"); extra.forEach(w => u2.append(waitLine(w, now))); d.append(u2); c2.append(d); root.append(c2);
+    }
+  });
+}
+function render(d){
+  last = d; stamp(); renderDisk(d.nodes); renderAgents(d.agents); renderWaiting(d.waiting); checkVersion(d);
+  const run = document.getElementById("running"); run.replaceChildren();
+  const items = d.running || [];
+  const procs = items.reduce((n, it) => n + (it.procs != null ? it.procs : 1), 0);   // [c] runs, not processes
+  document.getElementById("run-h").textContent = "Running simulations (" + items.length + ")" + (items.some(it => it.procs != null) ? " · " + procs + " process" + (procs === 1 ? "" : "es") : "");
+  if (!items.length) run.append(el("div", "card empty", "Nothing running."));
+  const st = d.stalled || [], sh = document.getElementById("stall-h"), sd = document.getElementById("stalled"); sd.replaceChildren();   // [c] 2026-11-26: no process, no new point for 2 h+
+  sh.hidden = !st.length; sh.textContent = "Stalled / abandoned (" + st.length + ") · no process and no new point for over 2 h";
+  st.forEach(it => { const c = el("div", "card"); c.append(el("div", "title", it.title)); c.append(el("div", "sub", [it.node, it.lane, it.setting].filter(Boolean).join(" · ")));
+    if (it.total) c.append(el("div", "meta", it.done + " of " + it.total + " " + (it.unit || "points") + " done")); sd.append(c); });
+  items.forEach(it => {
+    const c = el("div", "card");
+    c.append(el("div", "title", it.title));
+    if (it.kind === "sweep") {
+      c.append(el("div", "sub", [it.node, it.lane, it.setting, it.rss_gb + " GB"].join(" · ")));
+      c.append(analysis({name: "points", kind: "sweep", done: false, percent: it.percent,
+                         at: it.done + " of " + it.total + (it.tests > 1 ? " test runs" : "") + " done · " + it.running_points + " running · " + it.pending + " waiting" + (it.lost ? " · " + it.lost + " lost" : ""),   // [c] 2026-11-26
+                         left: it.left, eta: it.eta, eta_source: it.eta_basis || "est. from rate"}));
+    } else if (it.kind === "montecarlo") {   // [c] one card per Monte Carlo history; the jobs fold away
+      c.append(el("div", "sub", [it.node, it.lane, it.setting, it.rss_gb + " GB"].join(" · ")));
+      c.append(analysis({name: it.unit, kind: "monte carlo", done: false, percent: it.percent,
+                         at: it.done + " of " + it.total + " " + it.unit + (it.unit === "samples" && it.samples_per_job ? " (" + it.samples_per_job + " per job)" : ""),
+                         left: it.left, eta: it.eta, eta_source: it.eta_basis || "est. from rate"}));
+      c.append(el("div", "meta", it.logs_removed ? it.job_folders + " job folders, logs removed by Maestro"   // [c] not waiting jobs
+        : "jobs: " + it.jobs_done + " done · " + it.jobs_running + " running · " + it.jobs_waiting + " waiting · " + it.job_folders + " job folders so far" + (it.jobs_stopped ? " · " + it.jobs_stopped + " stopped" : "")));
+      if (it.errors) c.append(el("div", "meta bad", it.errors + " error" + (it.errors === 1 ? "" : "s") + " in finished jobs"));
+      if (it.jobs && it.jobs.length) {
+        const d = el("details"); d.append(el("summary", null, it.jobs.length + " running job" + (it.jobs.length === 1 ? "" : "s")));
+        const u = el("ul", "top"); it.jobs.forEach(j => { const li = el("li"); li.append(el("span", null, "job " + j.point), el("span", null, (j.percent != null ? j.percent.toFixed(1) + " %" : "starting") + " · " + j.running + " · " + j.cpu + " thr · " + j.rss_gb + " GB")); u.append(li); });
+        d.append(u); c.append(d);
+      }
+    } else if (it.kind === "calibre") {
+      c.append(el("div", "sub", [it.node, it.lane, "running " + it.running, it.threads + " threads", Math.round(it.cpu) + " % CPU", it.rss_gb + " GB"].join(" · ")));
+      const s = el("div", "an"); s.append(el("span", "stage", it.stage)); c.append(s);
+      c.append(el("div", "meta", (it.detail.join(" · ") || "no output files yet") + " · last file write " + it.last_write + " ago"));
+    } else {
+      c.append(el("div", "sub", [it.node, it.lane, it.setting, "running " + it.running, it.rss_gb + " GB", "log written " + it.log_age + " ago"].join(" · ")));
+      if (!it.analyses.length) c.append(el("div", "meta", "setting up (netlist read, DC operating point)"));
+      it.analyses.forEach(a => c.append(analysis(a)));
+      if (it.tests) c.append(el("div", "meta", "Maestro points/tests: " + it.tests[0] + " of " + it.tests[1] + " finished"));
+    }
+    run.append(c);
+  });
+  const list = (id, rows, fmt) => { const u = document.getElementById(id); u.replaceChildren(); if (!rows || !rows.length) { u.append(el("li", "empty", "none")); return; } rows.forEach(r => u.append(fmt(r))); };
+  list("finished", d.finished, f => { const li = el("li"); li.append(el("span", f.ok ? "ok" : "bad", f.ok ? "✓ " : "✗ ")); li.append(document.createTextNode(f.ago + " ago · " + f.node + " · " + f.name + " · " + f.result + (f.took ? " · " + f.took : ""))); return li; });
+  list("virtuoso", d.virtuoso, p => el("li", null, p.node + " · " + p.lane + (p.batch ? " (batch)" : "") + " · display " + p.display + " · up " + p.up + " · " + p.rss_gb + " GB"));
+}
+async function load(){
+  try {
+    const r = await fetch(API, {headers: {Accept: "application/vnd.github.raw+json"}, cache: "no-store"});
+    if (!r.ok) throw new Error("api " + r.status);
+    render(await r.json());
+  } catch (e) {
+    try { const r = await fetch(RAW + "?t=" + Date.now(), {cache: "no-store"}); if (r.ok) render(await r.json()); } catch (e2) {}
+  }
+}
+if (window.VWATCH_DATA) render(window.VWATCH_DATA); else { load(); setInterval(load, 120000); }  // GitHub API: 60 unauthenticated calls per hour per IP
+setInterval(stamp, 15000);
+</script>
+</body>
+</html>
