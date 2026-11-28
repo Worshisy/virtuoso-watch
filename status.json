@@ -1,0 +1,1105 @@
+{
+ "read_epoch": 1795882453.304415,
+ "read": "Sat 11-28 11:14:13 EST",
+ "nodes": [
+  {
+   "node": "m05",
+   "load": 33.7,
+   "cpus": 192,
+   "basis": "124 s avg",
+   "ours": 27.2,
+   "share": 14.2,
+   "disk": {
+    "mounts": [
+     {
+      "path": "/z",
+      "total": 5906183684096,
+      "used": 2000945500160,
+      "free": 3607506722816,
+      "pct": 35.7,
+      "label": "/z (local)"
+     }
+    ],
+    "scanning": false,
+    "top_age": 1479,
+    "top": [
+     [
+      "LRLocal-V2-DSP-tmp",
+      500.0
+     ],
+     [
+      "ADE_sim_dir: LRLocal-V2.1-agent · c_CLK_DIV16_CHAIN_tb",
+      167.0
+     ],
+     [
+      "LRLocal-V2-DSP",
+      71.3
+     ],
+     [
+      "ADE_sim_dir: LRLocal-V2.1-agent · c_DCO_Core_tb_full",
+      63.5
+     ],
+     [
+      "EMX_work",
+      50.1
+     ],
+     [
+      "ADE_sim_dir: LRLocal-V2.1-agent · c_CTRL_SubVthVref_V2p1_tb",
+      39.6
+     ],
+     [
+      "ADE_sim_dir: LRLocal-V2.1-agent · c_CLK_DIV16_TSPC_tb",
+      27.8
+     ],
+     [
+      "aon_leak",
+      23.4
+     ]
+    ]
+   },
+   "pool": {
+    "budget": 180,
+    "granted": 117,
+    "measured": 27.7,
+    "age": 0,
+    "load1": 33.3,
+    "nproc": 192,
+    "claims": [
+     {
+      "agent": "chain-su-rst",
+      "task": "corner sign-off short test 4x4",
+      "prio": "lead",
+      "cores": 17,
+      "want": 17,
+      "state": "granted",
+      "measured": 8.2,
+      "ram_gb": 3.5
+     },
+     {
+      "agent": "chain-su-rst",
+      "task": "signoff long 48 pts m05 queue 10x8",
+      "prio": "lead",
+      "cores": 83,
+      "want": 83,
+      "state": "granted",
+      "measured": 16.4,
+      "ram_gb": 1.5
+     },
+     {
+      "agent": "chain-su-rst",
+      "task": "race copies p18 p48 on m05 2x8",
+      "prio": "lead",
+      "cores": 17,
+      "want": 17,
+      "state": "granted",
+      "measured": 16.4,
+      "ram_gb": 1.5
+     }
+    ]
+   },
+   "mem": {
+    "total": 755.0,
+    "available": 683.5,
+    "ours": 45.3,
+    "others": 26.2,
+    "low": false
+   }
+  }
+ ],
+ "running": [
+  {
+   "kind": "spectre",
+   "title": "su_long/p48_m05/psf",
+   "node": "m05",
+   "lane": "batch / command line",
+   "setting": "Spectre X, preset CX, 8 threads · CPU 8 thr",
+   "running": "11 h 34 m",
+   "rss_gb": 0.8,
+   "log_age": "0 s",
+   "analyses": [
+    {
+     "name": "tran",
+     "kind": "transient",
+     "done": false,
+     "elapsed": null,
+     "percent": 39.4,
+     "at": "199 ms",
+     "iteration": null,
+     "left": "20 h 55 m",
+     "eta": "08:09",
+     "eta_source": "est. from rate"
+    }
+   ],
+   "tests": null,
+   "procs": 1
+  },
+  {
+   "kind": "spectre",
+   "title": "su_long/p18_m05/psf",
+   "node": "m05",
+   "lane": "batch / command line",
+   "setting": "Spectre X, preset CX, 8 threads · CPU 8 thr",
+   "running": "11 h 34 m",
+   "rss_gb": 0.8,
+   "log_age": "0 s",
+   "analyses": [
+    {
+     "name": "tran",
+     "kind": "transient",
+     "done": false,
+     "elapsed": null,
+     "percent": 41.7,
+     "at": "210.5 ms",
+     "iteration": null,
+     "left": "20 h 07 m",
+     "eta": "07:21",
+     "eta_source": "est. from rate"
+    }
+   ],
+   "tests": null,
+   "procs": 1
+  },
+  {
+   "kind": "sweep",
+   "title": "CTRL_LvLDet_chain_V2p1_tb · maestro · Interactive.13 · point sweep",
+   "node": "m05",
+   "lane": "agent headless :85",
+   "setting": "Spectre X, preset CX · 2 workers × 4 threads · CPU 8 thr",
+   "total": 60,
+   "done": 58,
+   "running_points": 0,
+   "pending": 2,
+   "percent": 96.7,
+   "left": "24 m",
+   "eta": "11:39",
+   "eta_basis": "rate since start",
+   "rss_gb": 1.4,
+   "workers": 2,
+   "quiet_s": null,
+   "lost": 0,
+   "tests": 1,
+   "points": 60,
+   "procs": 2
+  },
+  {
+   "kind": "montecarlo",
+   "title": "yishenys · sim_remote · su_long · farm",
+   "node": "m05",
+   "lane": "batch / command line",
+   "setting": "Spectre X, preset CX · 6 threads (last point) · no process now · last result 10:32, 41 m ago",
+   "rss_gb": 0.0,
+   "unit": "jobs",
+   "done": 54,
+   "total": 62,
+   "percent": 87.1,
+   "jobs_done": 54,
+   "jobs_running": 0,
+   "jobs_waiting": 0,
+   "jobs_stopped": 0,
+   "job_folders": 62,
+   "logs_removed": false,
+   "samples_per_job": null,
+   "errors": 0,
+   "left": null,
+   "eta": null,
+   "eta_basis": null,
+   "procs": 0,
+   "quiet_s": 2494,
+   "analyses": [
+    {
+     "name": "jobs",
+     "kind": "monte carlo",
+     "done": false,
+     "percent": 87.1,
+     "at": "54 of 62 jobs",
+     "left": null,
+     "eta": null,
+     "eta_source": null,
+     "elapsed": null,
+     "iteration": null
+    }
+   ],
+   "running": "0 jobs",
+   "log_age": "-",
+   "tests": null,
+   "jobs": []
+  }
+ ],
+ "stalled": [],
+ "finished": [],
+ "virtuoso": [
+  {
+   "node": "m05",
+   "lane": "m05t180",
+   "batch": false,
+   "display": ":86",
+   "up": "235 h 20 m",
+   "rss_gb": 0.9
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :87",
+   "batch": true,
+   "display": ":7774",
+   "up": "89 h 22 m",
+   "rss_gb": 0.8
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :85",
+   "batch": false,
+   "display": ":85",
+   "up": "21 h 50 m",
+   "rss_gb": 2.4
+  },
+  {
+   "node": "m05",
+   "lane": "shared GUI :95",
+   "batch": false,
+   "display": ":95",
+   "up": "378 h 53 m",
+   "rss_gb": 6.9
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :87",
+   "batch": false,
+   "display": ":87",
+   "up": "117 h 05 m",
+   "rss_gb": 8.3
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :87",
+   "batch": true,
+   "display": ":1193",
+   "up": "84 h 58 m",
+   "rss_gb": 0.8
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :87",
+   "batch": true,
+   "display": ":8093",
+   "up": "112 h 13 m",
+   "rss_gb": 0.8
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :87",
+   "batch": true,
+   "display": ":5717",
+   "up": "111 h 36 m",
+   "rss_gb": 0.8
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :85",
+   "batch": true,
+   "display": ":2629",
+   "up": "1 h 54 m",
+   "rss_gb": 1.9
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :87",
+   "batch": true,
+   "display": ":3868",
+   "up": "67 h 57 m",
+   "rss_gb": 0.8
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :88",
+   "batch": false,
+   "display": ":88",
+   "up": "36 h 49 m",
+   "rss_gb": 2.4
+  },
+  {
+   "node": "m05",
+   "lane": "agent headless :88",
+   "batch": true,
+   "display": ":7868",
+   "up": "36 h 35 m",
+   "rss_gb": 0.8
+  }
+ ],
+ "agents": {
+  "sessions": [
+   {
+    "name": "mac-vir-worker1",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": true,
+    "task": "chain start-up … low-voltage false-trigger check (V2.1 rst-gen bench, V2 comparison)",
+    "task_name": "chain-startup",
+    "steps": [
+     {
+      "n": 1,
+      "title": "plan + Yi's answers",
+      "status": "done",
+      "note": ""
+     },
+     {
+      "n": 2,
+      "title": "bench clean-up",
+      "status": "done",
+      "note": ""
+     },
+     {
+      "n": 3,
+      "title": "chain block PEX",
+      "status": "done",
+      "note": ""
+     },
+     {
+      "n": 4,
+      "title": "TT fast ramps (agv)",
+      "status": "done",
+      "note": ""
+     },
+     {
+      "n": 5,
+      "title": "V2.1 rst-gen bench (chain-su-rst)",
+      "status": "done",
+      "note": "01:16 V2.1 run … chain-su-rst resumed for the read-out"
+     },
+     {
+      "n": 6,
+      "title": "V2 comparison (agv)",
+      "status": "done",
+      "note": "V2 run done 23:40 (claim released); agv Neon S5-V2 read-out + V2 vs V2.1 dc comparison"
+     },
+     {
+      "n": 7,
+      "title": "setup OK + runs",
+      "status": "now",
+      "note": "sign-off running: 15 helper nodes + m05 (long), I.13 (short); est. longest ~40 h; watcher…"
+     },
+     {
+      "n": 8,
+      "title": "log + push",
+      "status": "next",
+      "note": ""
+     }
+    ],
+    "step_now": 7,
+    "step_total": 8,
+    "step_done": 6,
+    "waiting_on": "",
+    "updated": 1795874960.69,
+    "source": "status",
+    "changed": 1795839142.0,
+    "active": 1795874960.0,
+    "card_stale": null,
+    "last_action": "Update my thread's status line with the sign-off progress; push",
+    "last_epoch": 1795874956.199,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-skill",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795874949.579,
+    "source": "transcript",
+    "last_action": "Verify worker1's scope fixes",
+    "last_epoch": 1795874946.085,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-pool-manager",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795869415.227,
+    "source": "transcript",
+    "last_action": "Run the daily checks and compare with yesterday",
+    "last_epoch": 1795869252.53,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-respin-dig",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795833634.694,
+    "source": "transcript",
+    "last_action": "SendMessage",
+    "last_epoch": 1795749823.736,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-respin-master",
+    "model": "fable 5.2",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795833624.601,
+    "source": "transcript",
+    "last_action": "",
+    "last_epoch": null,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "new-proj-virtuoso",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795810429.083,
+    "source": "transcript",
+    "last_action": "SendMessage",
+    "last_epoch": 1795810424.295,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-vir-worker2",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795809626.271,
+    "source": "transcript",
+    "last_action": "Fix the 5.4 row mark, close the DONE follow-up, push",
+    "last_epoch": 1795809618.519,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "sy-mac-agent",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795747952.611,
+    "source": "transcript",
+    "last_action": "SendMessage",
+    "last_epoch": 1795747948.575,
+    "kind": "session",
+    "children": []
+   },
+   {
+    "name": "mac-HFSS",
+    "model": "opus 5.5",
+    "state": "idle",
+    "stale": false,
+    "task": "",
+    "steps": [],
+    "step_now": null,
+    "step_total": 0,
+    "step_done": 0,
+    "waiting_on": "",
+    "updated": 1795732635.586,
+    "source": "transcript",
+    "last_action": "Refresh the shape thread's Resume-here note and push",
+    "last_epoch": 1795732627.515,
+    "kind": "session",
+    "children": []
+   }
+  ],
+  "hidden_idle": 0
+ },
+ "waiting": {
+  "count": 7,
+  "open": 7,
+  "extras": 0,
+  "areas": {
+   "vir": 7,
+   "infra": 0
+  },
+  "items": [
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W47",
+    "label": "",
+    "kind": "review",
+    "title": "Item 5 RTL: review + commit the V2.1 edits (uncommitted)",
+    "summary": [
+     "Item 5 RTL itself is committed (742e5bc). Still uncommitted in the V2.1 tree, … your tb (+2 [c] lines), Makefile demo target, DV demo files (tb_item5_demo.svh, item5_demo.txt, signal_item5_demo.rc), …",
+     "a) review, then I commit (vc_hdrs.h deleted, a tool output)",
+     "b) commit as is",
+     "c) leave"
+    ],
+    "asked_by": "mac-respin-dig",
+    "session": "mac-respin-dig",
+    "since": 1795126905.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-dig/blob/main/docs/05-bgr-warmup/04-dco-start-delay-rtl.md"
+    },
+    "age": 755548,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W96",
+    "label": "",
+    "kind": "decision",
+    "title": "… end check word: plan Q1-Q6",
+    "summary": [
+     "Item 15 end check bits",
+     "decided: Q2 end+N bits, Q3 OTP+write-back+reboot, Q4 write back flag flipped then TX, Q7 3-step write-back",
+     "open Q1 after advisor: CRC-8 (Rec, 8 flops, 140 XOR2) or CRC-16 (16 flops, 332 XOR2)",
+     "Q5 packer computes CRC (Rec)",
+     "Q6 DV agent (Rec)"
+    ],
+    "asked_by": "mac-respin-dig",
+    "session": "mac-respin-dig",
+    "since": 1795461532.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-dig/blob/main/WHITEBOARD.md"
+    },
+    "age": 420921,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W113",
+    "label": "",
+    "kind": "decision",
+    "title": "Item 16: 5 scan-IO FSM flops left on a hold mux by DC",
+    "summary": [
+     "V2.1 core synthesized: 146 gates, every core flop gated except the 2 sync (planned) and 5 in the regfile scan-IO FSM (state 2, cnt 2, done 1): DC 'Min bitwidth not met', held by a mux with tx_en_dd (…",
+     "a) accept (Rec: idle in the field, value held)",
+     "b) set_clock_gating_style -minimum_bitwidth 1 in the V2.1 synth copy and rerun DC, report extra gates"
+    ],
+    "asked_by": "mac-respin-dig",
+    "session": "mac-respin-dig",
+    "since": 1795579145.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-dig/blob/main/docs/16-core-clock-gating/02-rtl-change.md"
+    },
+    "age": 303308,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W118",
+    "label": "",
+    "kind": "decision",
+    "title": "Item 16: SDF gate run fails (DC SDF, pre-CTS); known answer?",
+    "summary": [
+     "Zero-delay gate run passes … with the DC SDF (MAXIMUM, +notimingcheck) scan tests 5 … FAIL, opcode reads 0, state log diverges. Likely pre-CTS clock skew (DC SDF, ideal clocks, more ICGs), not proven",
+     "a) known answer: run the V2 netlist + its DC SDF on the same bench (reads V2 synthesis outputs in a sim; your OK) (Rec)",
+     "b) skip DC-SDF runs; timing proof = STA + post-APR SDF",
+     "c) other"
+    ],
+    "asked_by": "mac-respin-dig",
+    "session": "mac-respin-dig",
+    "since": 1795588488.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-dig/blob/main/docs/16-core-clock-gating/02-rtl-change.md"
+    },
+    "age": 293965,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W119",
+    "label": "",
+    "kind": "decision",
+    "title": "… bug: sprd_fac_cnt not cleared in TXING_IDLE",
+    "summary": [
+     "DV found (V2 and V2.1): sprd_fac_cnt is not cleared in TXING_IDLE; with spreading on, every burst after the first starts one cycle late (old RTL: config code on the pins for that cycle, PA on; item 1…",
+     "a) clear it in TXING_IDLE (1 line, new item)",
+     "b) leave, note only (Rec until the effect on the sample timing is checked)"
+    ],
+    "asked_by": "mac-respin-dig",
+    "session": "mac-respin-dig",
+    "since": 1795588488.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-dig/blob/main/docs/17-first-fcw-preload/01-plan.md"
+    },
+    "age": 293965,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W166",
+    "label": "chain-startup_6",
+    "kind": "decision",
+    "title": "chain-startup corners: core assignment (175 of 180 held for ~42 h)",
+    "summary": [
+     "(held back: server-only detail)",
+     "a) keep run, step claim down as jobs end + skill rules",
+     "b) stop, relaunch 4 thr x 38 jobs",
+     "c) leave",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker1",
+    "session": "mac-vir-worker1",
+    "since": 1795807338.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/14-layout/08-lvldet-chain-startup-log.md"
+    },
+    "age": 75115,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W168",
+    "label": "chain-startup_7",
+    "kind": "decision",
+    "title": "SMT threads test: setup before launch (agent, stage C, … benches, order)",
+    "summary": [
+     "Corner run stopping (Yi 14:38); SMT test next on idle m05, CX gmin 1e-15, standalone Spectre, m05 … ~3.5-4 h",
+     "agent: chain-su-rst Opus high (has netlists)",
+     "stage C pinning: in",
+     "M = chain on schematic, S = a vref schematic bench",
+     "order: L stages first, … after",
+     "Rec: all four as listed"
+    ],
+    "asked_by": "mac-vir-worker1",
+    "session": "mac-vir-worker1",
+    "since": 1795808349.0,
+    "done": null,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/WHITEBOARD.md"
+    },
+    "age": 74104,
+    "closed_ago": null
+   },
+   {
+    "source": "explicit",
+    "area": "infra",
+    "id": "W155",
+    "label": "",
+    "kind": "decision",
+    "title": "m05hl stuck in a SKILL call (maeOpenResults): wait, SIGINT Virtuoso, or restart the lane?",
+    "summary": [
+     "Virtuoso idle, no dialog; the call never returned, so the bridge-only restart can't run",
+     "SIGINT interrupts the call the way the bridge watchdog does; Virtuoso normally survives",
+     "A lane restart loses your open fnxSession274 (CTRL_LvLDet_chain_V2p1_tb maestro)"
+    ],
+    "asked_by": "mac-pool-manager",
+    "session": "mac-pool-manager",
+    "since": 1795762487.0,
+    "done": 1795803954.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/AgentSkillsSY/blob/main/Infra/vlsipool-server/references/vnc.md"
+    },
+    "age": 119966,
+    "closed_ago": 78499
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W156",
+    "label": "chain-startup_2",
+    "kind": "decision",
+    "title": "chain-startup: lane m05hl stuck in a SKILL call that never returns; Yi's maestro restore blocked",
+    "summary": [
+     "ask",
+     "maeOpenResults (01:19) never returned; Virtuoso idle, no dialog; your maestro still has startup_slow on, chain_tran off",
+     "a) wait for the call",
+     "b) pool-manager sends SIGINT to the lane Virtuoso (usually survives; else reopen your view on another lane)",
+     "c) full lane restart",
+     "Rec: b"
+    ],
+    "asked_by": "mac-vir-worker1",
+    "session": "mac-vir-worker1",
+    "since": 1795762496.0,
+    "done": 1795802787.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/ONGOING.md"
+    },
+    "age": 119957,
+    "closed_ago": 79666
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W157",
+    "label": "chain-startup_3",
+    "kind": "decision",
+    "title": "chain-startup: SIGINT did not free lane m05hl; restart the lane to unblock the maestro restore + corners?",
+    "summary": [
+     "ask",
+     "Virtuoso 1338546 blocked in select() inside maeOpenResults; SIGINT 13:19 changed nothing; your maestro is edit-locked by it",
+     "a) pool-manager restarts lane m05hl, removes the now-stale lock on your maestro, I restore it on another lane, corners follow",
+     "b) keep waiting",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker1",
+    "session": "mac-vir-worker1",
+    "since": 1795803718.0,
+    "done": 1795803739.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/ONGOING.md"
+    },
+    "age": 78735,
+    "closed_ago": 78714
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W158",
+    "label": "chain-startup_4",
+    "kind": "decision",
+    "title": "chain-startup corners: route for the 120-point run (full is ~61 h est.)",
+    "summary": [
+     "(held back: server-only detail)",
+     "a) full 120 pts, ~61 h est.",
+     "(held back: server-only detail)",
+     "(held back: server-only detail)",
+     "(held back: server-only detail)",
+     "(held back: server-only detail)"
+    ],
+    "asked_by": "mac-vir-worker1",
+    "session": "mac-vir-worker1",
+    "since": 1795804067.0,
+    "done": 1795804528.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/14-layout/08-lvldet-chain-startup-log.md"
+    },
+    "age": 78386,
+    "closed_ago": 77925
+   },
+   {
+    "source": "explicit",
+    "area": "infra",
+    "id": "W159",
+    "label": "chain-startup_5",
+    "kind": "decision",
+    "title": "Two sessions in one checkout: fix route for the shared-file conflicts",
+    "summary": [
+     "Both workers edit … live, same git author: whole-file rewrites lose sections (14.7 s7), pathspec commits take the peer's half-edits, pushes carry the peer's unreviewed commits, hooks count any … chan…",
+     "a) own git worktree per session + mac-skill scopes hooks by session",
+     "b) hooks only + rule: Edit tool, commit at once",
+     "c) rules in AGENTS.md only",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker1",
+    "session": "mac-vir-worker1",
+    "since": 1795805750.0,
+    "done": 1795806605.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/ONGOING.md"
+    },
+    "age": 76703,
+    "closed_ago": 75848
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W160",
+    "label": "docs-signoff-rule_1",
+    "kind": "decision",
+    "title": "Sign-off record name in …",
+    "summary": [
+     "Name of the one sign-off record per top block",
+     "a) SIGNOFF-<cell>.md in the item folder + table at top of …",
+     "b) the item folder's README.md is the record",
+     "c) <cell>-signoff.md, no number",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker2",
+    "session": "mac-vir-worker2",
+    "since": 1795806379.0,
+    "done": 1795806567.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/README.md"
+    },
+    "age": 76074,
+    "closed_ago": 75886
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W161",
+    "label": "docs-signoff-rule_2",
+    "kind": "decision",
+    "title": "Old record · log numbers after the rename",
+    "summary": [
+     "About 400 citations like record 2.4, log 9.6",
+     "a) keep them; … gets a was-N.k column so they still resolve; numbers never reused",
+     "b) rewrite all by script",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker2",
+    "session": "mac-vir-worker2",
+    "since": 1795806379.0,
+    "done": 1795806567.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/README.md"
+    },
+    "age": 76074,
+    "closed_ago": 75886
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W162",
+    "label": "docs-signoff-rule_3",
+    "kind": "decision",
+    "title": "Migration of the 8 existing sign-off docs",
+    "summary": [
+     "Who and when",
+     "a) now, one sub-agent on Sonnet high, dry-run rename list to you first",
+     "b) same on Fable medium (cheaper)",
+     "c) rule only; each block moves at its next sign-off",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker2",
+    "session": "mac-vir-worker2",
+    "since": 1795806379.0,
+    "done": 1795806567.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/README.md"
+    },
+    "age": 76074,
+    "closed_ago": 75886
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W163",
+    "label": "docs-signoff-rule_4",
+    "kind": "decision",
+    "title": "Accept the sign-off rename dry run, incl. deleting records 9.8 and 9.12",
+    "summary": [
+     "8 records to SIGNOFF-<cell>.md, 46 files' links rewritten",
+     "9.8 + 9.12 (vref, superseded): their 124 lines no other doc has become 2 chapters of log 9.6, then both files deleted (436 lines, stay in git history)",
+     "a) accept",
+     "b) accept, keep 9.8 · 9.12 as pointer stubs",
+     "c) hold",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker2",
+    "session": "mac-vir-worker2",
+    "since": 1795807298.0,
+    "done": 1795807419.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/scratch/signoff-rename/DRYRUN.md"
+    },
+    "age": 75155,
+    "closed_ago": 75034
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W164",
+    "label": "docs-signoff-rule_5",
+    "kind": "decision",
+    "title": "Record 5.4 (DCO tail): your … double-check line",
+    "summary": [
+     "Signed off 2026-11-17; the only waiver covers the 11-20 pin rename",
+     "a) waive for the whole record (signed off the day the rule came; pinned LVS CORRECT 2026-11-26)",
+     "b) you rerun … on j20, I add your OK line",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker2",
+    "session": "mac-vir-worker2",
+    "since": 1795807298.0,
+    "done": 1795807419.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/scratch/signoff-rename/DRYRUN.md"
+    },
+    "age": 75155,
+    "closed_ago": 75034
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W165",
+    "label": "docs-signoff-rule_6",
+    "kind": "decision",
+    "title": "Live view check of the 5 signed-off cells: model",
+    "summary": [
+     "Lane job, read-only: schematic check-clean and saved, no lock, layout XL link on its own cell; any fix would save your library's view, asked first",
+     "a) Sonnet high (mechanical-job trial rule)",
+     "b) Fable low",
+     "c) Fable medium",
+     "Rec: a"
+    ],
+    "asked_by": "mac-vir-worker2",
+    "session": "mac-vir-worker2",
+    "since": 1795807298.0,
+    "done": 1795807419.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/scratch/signoff-rename/DRYRUN.md"
+    },
+    "age": 75155,
+    "closed_ago": 75034
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W167",
+    "label": "docs-signoff-rule_7",
+    "kind": "review",
+    "title": "Review the rewritten sign-off records (3.4 SB re-listing, new design-guidance text)",
+    "summary": [
+     "Records renamed to SIGNOFF-<cell>.md and brought to the standard",
+     "3.4 PV divider: Table 2 SB column now in pin values (0 = shorted since the 11-19 inverters; default code 18 = SB 10 · ST 0111; … rows checked against the data file)",
+     "3.4 and 9.14: design-guidance sections are new wording",
+     "a) OK, ✅ stays",
+     "b) comments",
+     "9.14 is 365 lines"
+    ],
+    "asked_by": "mac-vir-worker2",
+    "session": "mac-vir-worker2",
+    "since": 1795807856.0,
+    "done": 1795809598.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/README.md"
+    },
+    "age": 74597,
+    "closed_ago": 72855
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W169",
+    "label": "chain-startup_8",
+    "kind": "decision",
+    "title": "Long-transient checkpoint rule plan + resume the 19 stopped corner points",
+    "summary": [
+     "All 19 stopped points wrote input.scs.tran.srf (3.3 MB) at the stop",
+     "Rule: tran point > 1 h -> saveclock 1800 s + saveperiodhistory=no set ahead, checked by a .srf; stop by … never kill -9; pause = … resume +recover in the netlist folder, dry-run first, OCEAN read-out…",
+     "Resume the 19 after the SMT test vs rerun from 0",
+     "Rec: rule as planned + resume"
+    ],
+    "asked_by": "mac-vir-worker1",
+    "session": "mac-vir-worker1",
+    "since": 1795808803.0,
+    "done": 1795808920.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/ONGOING.md"
+    },
+    "age": 73650,
+    "closed_ago": 73533
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W170",
+    "label": "chain-startup_9",
+    "kind": "decision",
+    "title": "SMT test stage 2 setup (agv stage 1 done; L ~2.0 h, M+S ~15 min est.)",
+    "summary": [
+     "Benches: L 57k nodes post-PEX (advice 4-8), M 571 nodes chain sch (advice 2-4), S 13 nodes vref sch (advice 1, parse-bound)",
+     "fast: A and F side by side on separate CCXs + 8-thread control <=3% (rec) vs efficient: sequential",
+     "S: keep as the tiny class (rec) vs swap to a larger small bench",
+     "M stage B: add (+5 min, rec)",
+     "go after the resume test ends ~15:35, claim 176"
+    ],
+    "asked_by": "mac-vir-worker1",
+    "session": "mac-vir-worker1",
+    "since": 1795810089.0,
+    "done": 1795810213.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/00-m-node-threads-log.md"
+    },
+    "age": 72364,
+    "closed_ago": 72240
+   },
+   {
+    "source": "explicit",
+    "area": "vir",
+    "id": "W171",
+    "label": "chain-startup_10",
+    "kind": "sign-off",
+    "title": "Corner sign-off run setup: two tests, 96 threads, launch after the SMT test (~21:05)",
+    "summary": [
+     "Yi's maestro, CX, gmin 1e-15, save selected, checkpoints saveclock 1800",
+     "startup_slow TR … ms 60 pts, 10 jobs x 8 thr",
+     "startup_slow_short TR … ms 60 pts, 4 jobs x 4 thr",
+     "<=96 threads, per-test job policies (fallback: global 12 jobs) checked in the first minutes",
+     "m05, ~30 h (est.), ETA ~11-29 03:00",
+     "Rec: launch"
+    ],
+    "asked_by": "mac-vir-worker1",
+    "session": "mac-vir-worker1",
+    "since": 1795828826.0,
+    "done": 1795828951.0,
+    "item": "",
+    "where": {
+     "url": "https://github.com/Worshisy/LRLocal-V2.1-vir/blob/main/docs/14-layout/08-lvldet-chain-startup-log.md"
+    },
+    "age": 53627,
+    "closed_ago": 53502
+   }
+  ]
+ },
+ "site_version": "611f995afb"
+}
